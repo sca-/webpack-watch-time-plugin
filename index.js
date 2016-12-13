@@ -1,3 +1,8 @@
+// cli output colors
+const RED = '\033[0;31m'
+const GREEN ='\033[0;32m'
+const NC ='\033[0m'
+
 module.exports = function() {
 	this.plugin('watch-run', function(watching, callback) {
 		const time = new Date();
