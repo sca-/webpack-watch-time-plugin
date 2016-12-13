@@ -1,0 +1,23 @@
+{
+  "name": "webpack-watch-time-plugin",
+  "version": "0.0.0",
+  "description": "Webpack plugin that displays time when watcher rebuild happens",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sca-/webpack-watch-time-plugin.git"
+  },
+  "keywords": [
+    "webpack",
+    "plugin"
+  ],
+  "author": "Semenov Evgeniy <semenov@tutu.ru>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sca-/webpack-watch-time-plugin/issues"
+  },
+  "homepage": "https://github.com/sca-/webpack-watch-time-plugin#readme"
+}
