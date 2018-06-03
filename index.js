@@ -12,9 +12,9 @@ function onWatchRun(watching, callback) {
 }
 
 module.exports = function() {
-	if (this.compiler.hooks) {
-		this.compiler.hooks.watchRun.tap('watch-time', onWatchRun);
+	if (this.hooks) {
+		this.hooks.watchRun.tapAsync('watch-time', onWatchRun);
 	} else {
-		this.compiler.plugin('watch-run', onWatchRun);
+		this.plugin('watch-run', onWatchRun);
 	}
 }
