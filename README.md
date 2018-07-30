@@ -11,11 +11,31 @@ let config = {
 	// <...>
 
 	plugins: [
-		WatchTimePlugin,
+		new WatchTimePlugin(),
 	]
 };
 
 module.exports = config;
+```
+
+## Configuration
+This plugin accepts an object with additional options:
+- `noChanges`: `boolean` | `Object` — If provided, the plugin will detect if no changes in source files were made
+
+Property | Type | Required | Description
+--- | --- | --- | --- | --- | ---
+noChanges.detect | boolean | No | Wherever to detect changes
+noChanges.report | boolean | No | If detecting, wherever to report when no changes were made (if `false`, plugin will provide no output at all in these cases)
+noChanges.includeNodeModules | boolean | No | Wherever to detect changes in `node_modules` folders either
+
+### Example
+```javascript
+new WatchTimePlugin({
+  noChanges: {
+    detect: true,
+    report: true
+  }
+})
 ```
 
 ## Usage
