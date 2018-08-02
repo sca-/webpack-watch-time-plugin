@@ -1,6 +1,7 @@
 // cli output colors
 const RED = '\033[0;31m'
 const GREEN ='\033[0;32m'
+const YELLOW ='\033[0;33m'
 const NC ='\033[0m'
 
 const fs = require('fs');
@@ -39,10 +40,15 @@ WatchTimePlugin.prototype.onWatchRun = function onWatchRun(watching, callback) {
   // If should report on no changes -> roll through source files and detect inner changes
   if (self.noChanges.detect) {
     Object.keys(watching.watchFileSystem.watcher.mtimes).forEach(function(file) {
-      const hash = getFileHash(file);
+      let hash;
+      try {
+        hash = getFileHash(file);
+      } catch (e) {
+        console.log(`${YELLOW}Cannot get source of "${file}"${NC}`)
+      }
       if (!self.sourceFiles) {
         self.changesWereMade = true;
-      } else if (hash !== self.sourceFiles[file]) {
+      } else if (hash && hash !== self.sourceFiles[file]) {
         self.sourceFiles[file] = hash;
         self.changesWereMade = true;
       }
@@ -88,7 +94,11 @@ WatchTimePlugin.prototype.onEmit = function onEmit(watching, callback) {
       });
     }
     sourceFiles.forEach(function(file) {
-      self.sourceFiles[file] = getFileHash(file);
+      try {
+        self.sourceFiles[file] = getFileHash(file);
+      } catch (e) {
+        console.log(`${YELLOW}Cannot get source of "${file}"${NC}`)
+      }
     });
   }
   callback();
