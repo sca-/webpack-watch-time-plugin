@@ -85,8 +85,8 @@ WatchTimePlugin.prototype.onEmit = function onEmit(watching, callback) {
 
   // First build fills up source filenames array and theis initial content hashes
   // (excluding node_modules files for productivity)
-  self.sourceFiles = self.sourceFiles || {};
-  if (!self.changesWereMade && watching.fileDependencies) {
+  if (!self.sourceFiles && watching.fileDependencies) {
+    self.sourceFiles = {};
     let sourceFiles = Array.from(watching.fileDependencies);
     if (!self.noChanges.includeNodeModules) {
       sourceFiles = sourceFiles.filter(function(file) {
