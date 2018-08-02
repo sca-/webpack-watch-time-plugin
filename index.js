@@ -40,7 +40,9 @@ WatchTimePlugin.prototype.onWatchRun = function onWatchRun(watching, callback) {
   if (self.noChanges.detect) {
     Object.keys(watching.watchFileSystem.watcher.mtimes).forEach(function(file) {
       const hash = getFileHash(file);
-      if (hash !== self.sourceFiles[file]) {
+      if (!self.sourceFiles) {
+        self.changesWereMade = true;
+      } else if (hash !== self.sourceFiles[file]) {
         self.sourceFiles[file] = hash;
         self.changesWereMade = true;
       }
