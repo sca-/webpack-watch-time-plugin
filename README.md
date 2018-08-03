@@ -21,12 +21,14 @@ module.exports = config;
 ## Configuration
 This plugin accepts an object with additional options:
 - `noChanges`: `boolean` | `Object` — If provided, the plugin will detect if no changes in source files were made
+- `logLevel`: `'error' | 'warn' | 'info'` — Log level for plugin output
 
-Property | Type | Required | Description
---- | --- | --- | --- 
-noChanges.detect | boolean | No | Wherever to detect changes
-noChanges.report | boolean | No | If detecting, wherever to report when no changes were made (if `false`, plugin will provide no output at all in these cases)
-noChanges.includeNodeModules | boolean | No | Wherever to detect changes in `node_modules` folders either
+Property | Type | Required | Default | Description
+--- | --- | --- | --- | ---
+noChanges.detect | boolean | No | false | Wherever to detect changes
+noChanges.report | boolean | No | false | If detecting, wherever to report when no changes were made (if `false`, plugin will provide no output at all in these cases)
+noChanges.includeNodeModules | boolean | No | false | Wherever to detect changes in `node_modules` folders either
+logLevel | string | No | `'error'` | Log level for plugin output. For debugging issues use `logLevel: 'warn'`
 
 ### Example
 ```javascript
@@ -34,7 +36,8 @@ new WatchTimePlugin({
   noChanges: {
     detect: true,
     report: true
-  }
+  },
+  logLevel: 'warn'
 })
 ```
 
