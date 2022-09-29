@@ -28,6 +28,15 @@ function getFileHash(file) {
   return crypto.createHash('md5').update(data).digest("hex");
 }
 
+function getChanges(watching) {
+  if (watching.watchFileSystem.watcher.mtimes !== undefined &&
+      watching.watchFileSystem.watcher.mtimes !== null) {
+    return Object.keys(watching.watchFileSystem.watcher.mtimes)
+  } else {
+    return []
+  }
+}
+
 /**
  *
  * @param {*} options - object with plugin parameters:
@@ -74,7 +83,7 @@ WatchTimePlugin.prototype.log = function log(level) {
 WatchTimePlugin.prototype.onWatchRun = function onWatchRun(watching, callback) {
   const self = this;
   self.changesWereMade = false;
-  const changes = Object.keys(watching.watchFileSystem.watcher.mtimes);
+  const changes = getChanges(watching);
   let realChanges, fakeChanges;
 
   // If should report on no changes -> roll through source files and detect inner changes
